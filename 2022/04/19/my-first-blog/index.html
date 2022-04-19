@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="TZE0rZyIqLl10trYu3BWBWa1Vmz6HFwhb2OcNEK4u-s" />
+     <link rel="shortcut icon" href= /img/favicon.ico >
+    <title>
+        R.Cao の Blog
+    </title>
+    <meta name="description" content= Welcome >
+    <meta name="keywords" content= Blog,Hexo,Theme,刘训灼,LiuXunzhuo >
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-home
+ replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            my-first-blog
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <ul>
+<li><p><a href="#%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F">三元表达式</a></p>
+<ul>
+<li><a href="#%E5%8F%98%E7%A7%8D">变种</a></li>
+</ul>
+</li>
+<li><p><a href="#%E7%94%9F%E6%88%90%E5%99%A8">生成器</a></p>
+<ul>
+<li><a href="#yield%E5%85%B3%E9%94%AE%E5%AD%97">yield关键字</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E5%BE%97%E5%88%B0%E7%94%9F%E6%88%90%E5%99%A8">通过列表推导式得到生成器</a></li>
+</ul>
+</li>
+<li><p><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2">数据类型相互转换</a></p>
+</li>
+<li><p><a href="#python%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4%E9%80%92%E5%BD%92%E6%B7%B1%E5%BA%A6">python更改默认递归深度</a></p>
+</li>
+<li><p><a href="#ascii%E8%BD%AC%E6%8D%A2">ascii转换</a></p>
+</li>
+<li><p><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8">哈希表创建及使用</a></p>
+</li>
+<li><p><a href="#%E5%B0%86%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%BB%A5%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E8%BE%93%E5%87%BA">将二维数组以矩阵形式输出</a></p>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8import-numpy-as-np">使用import numpy as np</a><h1 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">其他语言的三元表达式</span><br><span class="line">result = 判定条件? 为真时的结果:为假时的结果</span><br><span class="line">result = <span class="number">5</span>&gt;<span class="number">3</span>? <span class="number">1</span>:<span class="number">0</span>             # 条件为真是result赋值为<span class="number">1</span>，条件为假时赋值为<span class="number">0</span></span><br><span class="line">Python中的三元表达式</span><br><span class="line">result = 为真时的结果 <span class="keyword">if</span> 判断条件 <span class="keyword">else</span> 为假时的结果</span><br><span class="line"> result = x <span class="keyword">if</span> x &gt; y <span class="keyword">else</span> y # 如果条件成立，将x的值赋给result</span><br></pre></td></tr></table></figure>
+<h2 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cond = True</span><br><span class="line">name = [<span class="string">&quot;Cat&quot;</span>, <span class="string">&quot;Tom&quot;</span>][<span class="type">bool</span>(cond)]</span><br><span class="line">#<span class="string">&#x27;Tom&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1>可迭代的对象：生成器、元组、列表、集合、字典、字符串<br>可以被next()函数调用，不断返回下一个值得对象称为<strong>迭代器</strong>：Iterator。<br>通过iter()函数将可迭代的变成一个迭代器<h2 id="yield关键字"><a href="#yield关键字" class="headerlink" title="yield关键字"></a>yield关键字</h2>只要函数中出现了<strong>yield关键字</strong>，说明函数就不是函数了，是一个生成器，借助于next()获得元素<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def <span class="title function_">f</span><span class="params">()</span>:</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> True:</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">        n = i*<span class="number">3</span></span><br><span class="line">        yield n</span><br><span class="line">g = f()</span><br><span class="line">print(g)<span class="meta"># generator</span></span><br><span class="line">print(next(g))# <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="通过列表推导式得到生成器"><a href="#通过列表推导式得到生成器" class="headerlink" title="通过列表推导式得到生成器"></a>通过列表推导式得到生成器</h2>通过使用g.next()方式得到元素，或者使用next(g)得到元素，每调用一次则会产生一个元素。<br>若生成器产生的元素用完，继续调用则会抛出异常StopIteration<br>利用try…except的方式解决异常<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g = (x*<span class="number">3</span> <span class="keyword">for</span> x in range(<span class="number">10</span>))</span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    try:</span><br><span class="line">        e = next(g)</span><br><span class="line">        print(e)</span><br><span class="line">    except:</span><br><span class="line">        print(<span class="string">&#x27;没有更过元素了&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h1 id="数据类型相互转换"><a href="#数据类型相互转换" class="headerlink" title="数据类型相互转换"></a>数据类型相互转换</h1>从 float 到 int 的转换，值将会被截断（使其接近零）<h1 id="python更改默认递归深度"><a href="#python更改默认递归深度" class="headerlink" title="python更改默认递归深度"></a>python更改默认递归深度</h1>Python递归深度默认最大900多<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def <span class="title function_">fib</span><span class="params">(n)</span>:</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n*fib(n<span class="number">-1</span>)</span><br><span class="line">print(fib(<span class="number">1000</span>))#就会报错</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>) #例如这里设置为一百万</span><br></pre></td></tr></table></figure>
+<h1 id="ascii转换"><a href="#ascii转换" class="headerlink" title="ascii转换"></a>ascii转换</h1></li>
+</ul>
+</li>
+<li><p>ord(‘哈’)    #21704</p>
+</li>
+<li><p>chr(21704) #哈</p>
+</li>
+<li><p>ord(‘a’) #97</p>
+</li>
+<li><p>chr(97) #a</p>
+</li>
+</ul>
+<h1 id="哈希表创建及使用"><a href="#哈希表创建及使用" class="headerlink" title="哈希表创建及使用"></a>哈希表创建及使用</h1> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>]</span><br><span class="line">#将nums中的值与其对应的下标存储在哈希表中方便寻找其在nums中是否存在</span><br><span class="line"># 如果存在则输出其下标</span><br><span class="line"> mp = <span class="built_in">list</span>()</span><br><span class="line"> #初始化哈希表</span><br><span class="line"> <span class="keyword">for</span> i,num in enumerate(nums):</span><br><span class="line"> 	mp[num] = i</span><br></pre></td></tr></table></figure>
+<h1 id="将二维数组以矩阵形式输出"><a href="#将二维数组以矩阵形式输出" class="headerlink" title="将二维数组以矩阵形式输出"></a>将二维数组以矩阵形式输出</h1><h2 id="使用import-numpy-as-np"><a href="#使用import-numpy-as-np" class="headerlink" title="使用import numpy as np"></a>使用import numpy as np</h2> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">print(np.<span class="built_in">array</span>(<span class="built_in">list</span>))</span><br></pre></td></tr></table></figure>
+<p> 输出结果：<br>[[1 2 3]<br> [1 2 3]<br> [1 2 3]]</p>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p><h4>Copyright © 2020 | Author: R.Cao | Theme By <a class="theme-author" target="_blank" rel="noopener" href="https://github.com/Xunzhuo/hexo-theme-coder" style="font-size:14px; color: #969696">Coder</a></h4>
+    <label class="el-switch el-switch-blue el-switch-sm" style="vertical-align: sub;">
+        <input type="checkbox" name="switch" id="update_style">
+        <span class="el-switch-style"></span>
+    </label>
+    <!--         <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script> -->
+</p>
+</div>
+<input type="hidden" id="web_style" value="light">
+<input type="hidden" id="valine_appid" value="NOsswOncKgc8HOxqo9oxIWlX-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="z1FihjWEbS8uIfUQdmCtK7zz">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+color: #698fca;
+}
+.v .vlist .vcard .vhead .vsys {
+color: #3a3e4a;
+}
+.v .vlist .vcard .vh .vmeta .vat {
+color: #638fd5;
+}
+.v .vlist .vcard .vhead .vnick {
+color: #6ba1ff;
+}
+.v a {
+color: #8696b1;
+}
+.v .vlist .vcard .vhead .vnick:hover {
+color: #669bfc;
+}
+</style>
+    <script type="text/javascript" color="173,174,173" opacity='1' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>
